@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bkdundfmmykcq"]
+
+[ext_resource type="PackedScene" uid="uid://dmnkvhh7qhnvq" path="res://Scenes/player1.tscn" id="1_7yn8b"]
+[ext_resource type="Script" uid="uid://7o8vwin64lwm" path="res://Scripts/Player2.gd" id="2_etk83"]
+[ext_resource type="Texture2D" uid="uid://hlan870xokfp" path="res://Media/Map/Final Track.jpg" id="3_etk83"]
+
+[node name="Map" type="Node2D" unique_id=524353609]
+
+[node name="Player 1" parent="." unique_id=363009625 instance=ExtResource("1_7yn8b")]
+position = Vector2(460.011, 224.52692)
+
+[node name="Player 2" parent="." unique_id=517615560 instance=ExtResource("1_7yn8b")]
+position = Vector2(460.011, 224.52692)
+script = ExtResource("2_etk83")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=891471224]
+z_index = -1
+position = Vector2(964, 534)
+texture = ExtResource("3_etk83")
