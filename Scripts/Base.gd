@@ -12,7 +12,7 @@ func _ready() -> void:
 	_add_new_player_viewport(null)
 	_update_viewport_size()
 
-func _add_new_player_viewport(new_player_node: Area2D) -> void:
+func _add_new_player_viewport(new_player_node: CharacterBody2D) -> void:
 	var new_subviewportcontainer: SubViewportContainer = SubViewportContainer.new()
 	var new_subviewport: SubViewport = SubViewport.new()
 	new_subviewportcontainer.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
@@ -57,7 +57,7 @@ func _update_viewport_size() -> void:
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("AddPlayers"):
-		var new_player: Area2D = load("res://Scenes/player.tscn").instantiate()
+		var new_player: CharacterBody2D = load("res://Scenes/player.tscn").instantiate()
 		new_player.player_id = screen_container.get_child_count()
 		level_node.add_child(new_player)
 		_add_new_player_viewport(new_player)
@@ -65,7 +65,7 @@ func _process(delta: float) -> void:
 		
 	if Input.is_action_just_pressed("RemovePlayers"):
 		var screen_to_remove: SubViewportContainer = screen_container.get_child(screen_container.get_child_count()-1)
-		var player_to_remove: Area2D
+		var player_to_remove: CharacterBody2D
 		for i in level_node.get_tree().get_nodes_in_group("player"):
 			if i.player_id == screen_container.get_child_count() - 1:
 				player_to_remove = i

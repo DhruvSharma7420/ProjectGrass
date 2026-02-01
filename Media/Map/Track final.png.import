@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hlan870xokfp"
-path="res://.godot/imported/Final Track.jpg-70289a6e2b1903fe077bb9628577488e.ctex"
+uid="uid://b7wh5esi4cm17"
+path="res://.godot/imported/Track final.png-13f51f67eba6815b4f0ccff821af0d38.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Media/Map/Final Track.jpg"
-dest_files=["res://.godot/imported/Final Track.jpg-70289a6e2b1903fe077bb9628577488e.ctex"]
+source_file="res://Media/Map/Track final.png"
+dest_files=["res://.godot/imported/Track final.png-13f51f67eba6815b4f0ccff821af0d38.ctex"]
 
 [params]
 

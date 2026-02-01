@@ -1,4 +1,4 @@
-extends Area2D
+extends CharacterBody2D
 
 var player_id: int = 0
 
@@ -16,12 +16,12 @@ var _steer: float = 0.0
 
 
 var base_max_speed = 500
-var base_steer_strength = 4
+var base_steer_strength = 1
 var base_accel = 70
 
 var boost_speed = 1.25   # speed mode
 var boost_accel = 1.6    # accel mode
-var boost_grip = 1.3     # grip mode
+var boost_grip = 2     # grip mode
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -29,10 +29,10 @@ func _ready() -> void:
 	match player_id:
 		0:
 			$Sprite2D.texture = load("res://Media/Car/P1Default.png")
-			global_position = Vector2(0,0)
+			global_position = Vector2(594, 5809)
 		1:
 			$Sprite2D.texture = load("res://Media/Car/P2Default.png")
-			global_position = Vector2(0, -10)
+			global_position = Vector2(650, 5809)
 
 	_accel = base_accel
 	_steerstrength = base_steer_strength
@@ -56,9 +56,7 @@ func _process(delta: float) -> void:
 		changemode(mode)
 	
 	if accelpressed > 0:
-		print("accelpressed")
 		if _velocity < _topspeedF:
-			print ("1")
 			if _velocity >= 0:
 				_velocity += _accel * delta
 			elif _velocity < 0:
@@ -66,7 +64,6 @@ func _process(delta: float) -> void:
 		else:
 			_velocity -= friction * delta
 	elif reversepressed > 0 and accelpressed == 0:
-		print("2")
 		if _velocity > 0:
 			_velocity -= (friction + _accel) * brakingforce * delta
 		else:
@@ -74,17 +71,18 @@ func _process(delta: float) -> void:
 	else:
 		_steer = 0
 		if _velocity > 1:
-			print ("3")
 			_velocity -= friction * delta
 		elif _velocity < -1:
-			print ("4")
 			_velocity += friction * delta
 		else:
-			print ("5")
 			_velocity += accelpressed * delta
 
 func _physics_process(delta: float) -> void:
-	position -= transform.y * _velocity * delta
+	velocity = -transform.y * _velocity
+	move_and_slide()
+
+	if get_slide_collision_count() > 0:
+		_velocity *= 0.4  # lose 60% speed on impact
 	
 
 func apply_rotation(delta: float) -> void:

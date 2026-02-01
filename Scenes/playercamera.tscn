@@ -2,4 +2,3 @@
 
 [node name="Playercamera" type="Camera2D" unique_id=708015469]
 ignore_rotation = false
-zoom = Vector2(2, 2)
