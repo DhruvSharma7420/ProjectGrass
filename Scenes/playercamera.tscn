@@ -1,3 +1,4 @@
 [gd_scene format=3 uid="uid://d3yymtl0073pj"]
 
 [node name="Playercamera" type="Camera2D" unique_id=708015469]
+ignore_rotation = false

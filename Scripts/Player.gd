@@ -14,9 +14,9 @@ var speedmode = 1
 var _steer: float = 0.0
 
 
-var base_max_speed = 900
-var base_steer_strength = 4.5
-var base_accel = 420
+var base_max_speed = 200
+var base_steer_strength = 3
+var base_accel = 100
 
 var boost_speed = 1.25   # speed mode
 var boost_accel = 1.6    # accel mode
@@ -52,8 +52,6 @@ func _process(delta: float) -> void:
 		else:
 			mode = 0
 		changemode(mode)
-	print(mode)
-	print(_velocity)
 	
 	if accelpressed > 0:
 		if _velocity < _topspeedF:
@@ -63,7 +61,7 @@ func _process(delta: float) -> void:
 			_velocity += friction * delta
 	elif reversepressed > 0 and accelpressed == 0:
 		print("2")
-		_velocity -= _accel * delta
+		_velocity -= (friction + _accel) * delta
 	else:
 		_steer = 0
 		if _velocity > 5:
