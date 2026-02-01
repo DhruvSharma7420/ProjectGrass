@@ -8,15 +8,16 @@ var _topspeedF: float = 0.0
 var _topspeedR: float = 0.0
 var _velocity: float = 0.0
 var friction: float = 0.0
+var brakingforce: float = 0.0
 var mode: int = 0
 var acceleratemode = 0
 var speedmode = 1
 var _steer: float = 0.0
 
 
-var base_max_speed = 200
-var base_steer_strength = 3
-var base_accel = 100
+var base_max_speed = 500
+var base_steer_strength = 4
+var base_accel = 70
 
 var boost_speed = 1.25   # speed mode
 var boost_accel = 1.6    # accel mode
@@ -37,7 +38,8 @@ func _ready() -> void:
 	_steerstrength = base_steer_strength
 	_topspeedF = base_max_speed
 	_topspeedR = (0 - base_max_speed) / 2.0
-	friction = 300
+	friction = 3
+	brakingforce = 10
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -54,25 +56,32 @@ func _process(delta: float) -> void:
 		changemode(mode)
 	
 	if accelpressed > 0:
+		print("accelpressed")
 		if _velocity < _topspeedF:
 			print ("1")
-			_velocity += _accel * delta
+			if _velocity >= 0:
+				_velocity += _accel * delta
+			elif _velocity < 0:
+				_velocity += (_accel * brakingforce) * delta
 		else:
-			_velocity += friction * delta
+			_velocity -= friction * delta
 	elif reversepressed > 0 and accelpressed == 0:
 		print("2")
-		_velocity -= (friction + _accel) * delta
+		if _velocity > 0:
+			_velocity -= (friction + _accel) * brakingforce * delta
+		else:
+			_velocity -= (friction + _accel) * delta
 	else:
 		_steer = 0
-		if _velocity > 5:
+		if _velocity > 1:
 			print ("3")
 			_velocity -= friction * delta
-		elif _velocity < -5:
+		elif _velocity < -1:
 			print ("4")
 			_velocity += friction * delta
 		else:
 			print ("5")
-			_velocity = 0
+			_velocity += accelpressed * delta
 
 func _physics_process(delta: float) -> void:
 	position -= transform.y * _velocity * delta
@@ -80,7 +89,7 @@ func _physics_process(delta: float) -> void:
 
 func apply_rotation(delta: float) -> void:
 	var speed_ratio = abs(_velocity) / _topspeedF
-	speed_ratio = clamp(speed_ratio, 0.2, 1.0) # minimum turning at low speed
+	speed_ratio = clamp(speed_ratio, 0.1, 1.0) # minimum turning at low speed
 
 	if abs(_velocity) > 5:
 		rotate(_steerstrength * speed_ratio * delta * _steer)
@@ -102,5 +111,6 @@ func changemode(_delta: float) -> void:
 
 	else: # grip mode
 		_steerstrength *= boost_grip
+		brakingforce += (boost_grip * 10)
 		_accel *= 0.6
 		$Sprite2D.texture = load("res://Media/Car/P" + str(player_id + 1) + "Grip.png")

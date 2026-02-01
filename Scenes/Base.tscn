@@ -7,8 +7,8 @@ script = ExtResource("1_lrlth")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=2147420356]
 show_behind_parent = true
-offset_right = 160.0
-offset_bottom = 90.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 color = Color(0.14117648, 0, 0, 1)
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=688768747]
