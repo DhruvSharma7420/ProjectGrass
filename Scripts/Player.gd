@@ -29,10 +29,10 @@ func _ready() -> void:
 	match player_id:
 		0:
 			$Sprite2D.texture = load("res://Media/Car/P1Default.png")
-			global_position = Vector2(594, 5809)
+			global_position = Vector2(500, 5809)
 		1:
 			$Sprite2D.texture = load("res://Media/Car/P2Default.png")
-			global_position = Vector2(650, 5809)
+			global_position = Vector2(700, 5809)
 
 	_accel = base_accel
 	_steerstrength = base_steer_strength

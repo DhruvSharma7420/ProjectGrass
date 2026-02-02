@@ -3,18 +3,14 @@
 [ext_resource type="Script" uid="uid://dbpvp60qy8h45" path="res://Scripts/Player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://vx0ppqpa42qk" path="res://Media/Car/P1Default.png" id="2_cvnsp"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jd6gr"]
-radius = 77.0
-height = 390.0
-
 [node name="Player" type="CharacterBody2D" unique_id=466549696]
+collision_layer = 2
 script = ExtResource("1_cvnsp")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1860729330]
 texture = ExtResource("2_cvnsp")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=850035838]
-position = Vector2(0, 26)
-shape = SubResource("CapsuleShape2D_jd6gr")
-
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="." unique_id=659067522]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1723992135]
+polygon = PackedVector2Array(-83, -118, -18, -130, -19, -91, -61, -91, -60, -100, -83, -100, -80, -58, -57, -60, -61, -72, -22, -72, -21, -61, -28, -61, -32, -28, -37, -28, -37, -12, -48, -12, -51, 12, -59, 12, -58, 40, -50, 39, -51, 82, -41, 82, -39, 139, -63, 142, -61, 134, -78, 133, -81, 169, -64, 169, -63, 156, -26, 160, -61, 193, -41, 228, 42, 231, 61, 189, 31, 159, 60, 161, 63, 173, 79, 171, 82, 129, 62, 130, 63, 141, 41, 139, 41, 80, 51, 80, 49, 41, 62, 39, 58, 9, 47, 9, 50, -10, 37, -12, 40, -32, 29, -34, 30, -60, 17, -61, 20, -71, 62, -71, 62, -62, 81, -61, 82, -102, 60, -101, 61, -90, 17, -94, 20, -131, 80, -118, -2, -169)
